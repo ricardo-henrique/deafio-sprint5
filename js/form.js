@@ -1,6 +1,15 @@
 //class contato
 
-class contato {}
+class contato {
+  constructor(name, surname, email, id, celphone, contact) {
+    this.name = name;
+    this.surname = surname;
+    this.email = email;
+    this.id = id;
+    this.celphone = celphone;
+    this.contact = contact;
+  }
+}
 
 function Post(form) {
   let data = new contato(
