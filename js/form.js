@@ -20,12 +20,39 @@ function Post(form) {
     form.elements.namedItem('telefone').value,
     form.elements.namedItem('contato').value
   );
+
+  return Enviar(data);
 }
 
-function Enviar() {
-  let nome = document.getElementById('nomeid');
-
-  if (nome.value != '') {
-    alert('Obrigado sr(a) ' + nome.value + ' os seus dados foram encaminhados com sucesso');
+function Enviar(data) {
+  if (data.name.length < 3) {
+    alert('O nome deve ter pelo menos 3 caracteres');
+    return false;
   }
+
+  if (data.surname.length < 3) {
+    alert('O sobrenome deve ter pelo menos 3 caracteres');
+    return false;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(data.email)) {
+    alert('Por favor, insira um email válido');
+    return false;
+  }
+
+  const cpfClean = data.id.replace(/[^\d]/g, '');
+  if (cpfClean.length !== 11) {
+    alert('CPF inválido');
+    return false;
+  }
+
+  const telefoneClean = data.celphone.replace(/[^\d]/g, '');
+  if (telefoneClean.length < 10 || telefoneClean.length > 11) {
+    alert('Telefone inválido');
+    return false;
+  }
+
+  alert('Obrigado sr(a) ' + data.name + ' ' + data.surname + ' os seus dados foram encaminhados com sucesso');
+  return true;
 }
